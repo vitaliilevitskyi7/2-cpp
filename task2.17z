@@ -1,0 +1,33 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+// Власна функція sigmweight(x)
+double sigmweight(double x) {
+    return x / (1.0 + std::exp(-x));
+}
+
+// Власна функція для обчислення похідної
+double sigmweight_derivative(double x) {
+    double exp_neg_x = std::exp(-x);
+    double denominator = 1.0 + exp_neg_x;
+    
+    // Чисельник похідної: 1 + e^(-x) + x * e^(-x)
+    double numerator = 1.0 + exp_neg_x + x * exp_neg_x;
+    
+    return numerator / (denominator * denominator);
+}
+
+int main() {
+    double x;
+    std::cout << "Введіть значення x: ";
+    std::cin >> x;
+
+    // Налаштування точного виведення
+    std::cout << std::fixed << std::setprecision(6);
+
+    std::cout << "f(x)  = sigmweight(" << x << ") = " << sigmweight(x) << "\n";
+    std::cout << "f'(x) = derivative(" << x << ") = " << sigmweight_derivative(x) << "\n";
+
+    return 0;
+}
